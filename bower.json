@@ -1,0 +1,19 @@
+{
+  "name": "purescript-react-router",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arthur-xavier/purescript-react-router.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "purescript-react": "^1.1.0",
+    "purescript-dom": "^2.0.0",
+    "purescript-routing": "^2.0.0"
+  }
+}
