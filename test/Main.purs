@@ -4,8 +4,8 @@ import Prelude
 import React.DOM as D
 import Control.Alternative ((<|>))
 import Control.Monad.Eff.Console (logShow)
-import Data.Int (fromNumber)
-import Data.Maybe (Maybe(Just), fromMaybe)
+import Data.Int (floor)
+import Data.Maybe (Maybe(Just))
 import React (Render)
 import React.Router.Hash (hashRouter)
 import React.Router.History (historyRouter)
@@ -31,7 +31,7 @@ match =
   <|>
   User <$> (lit "/" *> lit "user" *> str)
   <|>
-  Product <$> (fromMaybe 0 <<< fromNumber) <$> (lit "/" *> lit "product" *> num)
+  Product <$> (lit "/" *> lit "product" *> (floor <$> num))
   <|>
   About <$ (lit "/" *> lit "about")
 
