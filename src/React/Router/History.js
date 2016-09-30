@@ -13,11 +13,13 @@ exports.watchHistory = function(handler) {
 
 exports.linkHandler = function(url) {
   return function(ev) {
-    ev.preventDefault();
-    if (typeof window !== 'undefined') {
-      window.history.pushState({}, document.title, url);
-      window.dispatchEvent(new Event('popstate'));
-    }
+    return function() {
+      ev.preventDefault();
+      if (typeof window !== 'undefined') {
+        window.history.pushState({}, document.title, url);
+        window.dispatchEvent(new Event('popstate'));
+      }
+    };
   };
 };
 
