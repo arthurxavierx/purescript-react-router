@@ -1,13 +1,13 @@
 module Test.Counter where
 
 import Prelude
+import React as R
 import React.DOM as D
 import Control.Alternative ((<|>))
 import Control.Monad.Eff.Console (logShow)
 import Data.Int (floor)
 import Data.Maybe (Maybe(Just))
-import React (Render)
-import React.Router.Hash (hashRouter)
+import React.Router.Hash (hashRouter')
 import React.Router.History (historyRouter)
 import React.Router.String (stringRouter)
 import Routing.Match (Match)
@@ -25,6 +25,7 @@ instance showRoute :: Show Route where
   show (Product id) = "Product " <> (show id)
   show About = "About"
 
+--
 match :: Match Route
 match =
   Home <$ lit "/"
@@ -35,11 +36,15 @@ match =
   <|>
   About <$ (lit "/" *> lit "about")
 
-render :: forall props state eff. Render props state eff
+--
+component :: forall props. R.ReactClass props
+component = R.createClass $ R.spec {} render
+
+render :: forall props state eff. R.Render props state eff
 render this = pure $
   D.div'
-    [ hashRouter logShow match
-    , historyRouter logShow match
+    [ hashRouter' logShow match
+    , historyRouter renderScene match
     , stringRouter renderScene match "/user/test123"
     ]
   where
